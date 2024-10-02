@@ -43,9 +43,12 @@ if (!isset($_SESSION["productos"])){
 
 </form>
 
-<h1> Inventary </h1>
+<h3> Inventary </h3>
   <?php
   if (isset($_POST["workname"]) && isset($_POST["product"])){
+
+    $error1 = false;
+    $error2 = false;
 
     if (isset($_POST["Add"])){
       
@@ -63,40 +66,46 @@ if (!isset($_SESSION["productos"])){
 
       }
 
-      echo "<span> Worker: ".$_POST["workname"]." 
-      <br> <br> Units Milk: ".$_SESSION["productos"]["milk"]."
-      <br> <br> Units Soft Drink: ".$_SESSION["productos"]["drink"]."
-      </span>";
-      
-    } else if (isset($_POST["Add"])){
+    } else if (isset($_POST["Remove"])){
       
       switch ($_POST["product"]){
         case "drink":
-          
-          $_SESSION["productos"]["drink"] += $_POST["cantprod"];
+
+          if ($_SESSION["productos"]["drink"] - $_POST["cantprod"] < 0){
+            
+            $error1 = true;
+
+          } else {
+            $_SESSION["productos"]["drink"] -= $_POST["cantprod"];
+          }
 
         break;
         case "milk":
 
-          $_SESSION["productos"]["milk"] += $_POST["cantprod"];
+          if ($_SESSION["productos"]["milk"] - $_POST["cantprod"] < 0){
+
+            $error2 = true;
+
+          } else {
+            $_SESSION["productos"]["milk"] -= $_POST["cantprod"];
+          }
 
         break;
 
       }
 
-      echo "<span> Worker: ".$_POST["workname"]." 
-      <br> <br> Units Milk: ".$_SESSION["productos"]["milk"]."
-      <br> <br> Units Soft Drink: ".$_SESSION["productos"]["drink"]."
-      </span>";
     }
 
-
-
+    echo "Worker: ".$_POST["workname"];
+    echo "<br> <br> Units Milk: ".$_SESSION["productos"]["milk"]."  <br> <br> Units Soft Drink: ".$_SESSION["productos"]["drink"];
+    if ($error1){
+      echo "<h3> !! ERROR !! QUANTITY OF SOFT DRINK LESS THAN 0 </h3> ";
+    }
+    if ($error2){
+      echo "<h3> !! ERROR !! QUANTITY OF MILK LESS THAN 0 </h3> ";
+    }
 
   }
-    
-
-
 
   ?>
 </body>
