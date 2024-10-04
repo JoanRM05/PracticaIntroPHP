@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION["threenums"])){
 
-  $_SESSION["threenums"] = array(0, 0, 0);
+  $_SESSION["threenums"] = array(10, 20, 30);
 
 }
     
