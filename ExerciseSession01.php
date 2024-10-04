@@ -22,7 +22,7 @@ if (!isset($_SESSION["productos"])){
 <body>
 <h1> Supermarket management </h1>
 
-<form action="/PracticaIntroPHP/ExerciseSession01.php" method='POST'>
+<form method='POST'>
 
     Worker name: <input type='text' name="workname" required> 
 
